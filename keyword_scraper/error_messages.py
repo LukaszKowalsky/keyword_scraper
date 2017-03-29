@@ -1,0 +1,7 @@
+CONNECTION_ERROR = 'Serwer docelowy jest nieosiągalny'
+HTTP_ERROR = 'Serwer docelowy zwrócił błąd odpowiedzi na żądanie HTTP'
+TIMEOUT = 'Upłynął limit czasu żądania'
+META_KEYWORDS_TAG_NOT_FOUND = 'Adres URL prowadzi do strony, która nie dostarcza informacji o słowach kluczowych'
+INVALID_CONTENT_TYPE = 'Adres URL prowadzi do strony, która ma nieprawidłowy format'
+INVALID_URL = 'Adres URL jest nieprawidłowy'
+UNEXPECTED_EXCEPTION = 'Wystąpił nieokreślony błąd'

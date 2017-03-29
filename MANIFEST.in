@@ -1,0 +1,2 @@
+recursive-include keyword_scraper/templates *
+recursive-include keyword_scraper/static *

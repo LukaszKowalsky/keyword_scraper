@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap/bootstrap.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='site.css') }}"/>
+    <link rel="stylesheet" type="text/css"
+          href="{{ url_for('static', filename='font-awesome/css/font-awesome.min.css') }}">
+</head>
+
+<body>
+<div class="container body-content">
+    <div>
+        <h2>Wyszukiwanie słów kluczowych</h2>
+        <p>
+            <small class="text-muted">Podaj adres URL strony, z której chcesz odczytać słowa kluczowe.</small>
+        </p>
+        <form method="post" action="{{ url_for('get_keywords_frequency') }}">
+            <div class="form-group">
+                <div class="input-group">
+                    <input class="form-control" placeholder="URL" name="url" {% if url %}value="{{ url }}"{% endif %}>
+                    <span class="input-group-btn">
+                            <button type="submit" class="btn btn-primary">Wyszukaj</button>
+                        </span>
+                </div>
+                {% with errors = get_flashed_messages(category_filter=["error"]) %}
+                    {% if errors %}
+                        {%- for error in errors %}
+                            <div class="error text-danger">
+                                <i class="fa fa-frown-o" aria-hidden="true"></i>
+                                {{ error }}
+                            </div>
+                        {% endfor -%}
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </form>
+    </div>
+    {% if keyword_frequency_map %}
+        <br/>
+        <h4>Statystyka słów kluczowych dla strony <a href="{{ url }}">{{ url }}</a></h4>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Słowo kluczowe</th>
+                <th>Liczba wystapień</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for entry in keyword_frequency_map %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td>{{ entry[0] }}</td>
+                    <td>{{ entry[1] }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    <hr/>
+    <footer>
+        <p>&copy; Łukasz Kowalski</p>
+    </footer>
+</div>
+</body>
+</html>
